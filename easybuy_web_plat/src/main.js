@@ -10,8 +10,21 @@ import Vuex from 'vuex'
 //import NProgress from 'nprogress'
 //import 'nprogress/nprogress.css'
 import routes from './routes'
-import Mock from './mock'
-Mock.bootstrap();
+//import Mock from './mock'   //我们使用axios异步访问后台，就需要将mock注释
+//Mock.bootstrap();
+
+//文件上传与删除需要一个分布式文件系统的id
+Vue.prototype.$fileIp = "http://192.168.43.50";
+
+Vue.prototype.$filePath = "";
+
+// 引用axios，并设置基础URL为后端服务api地址
+var axios = require('axios')
+axios.defaults.baseURL = 'http://127.0.0.1:9527/services'  //对应后端网关统一地址
+// 将API方法绑定到全局  也就是给vue配置一个全局属性，在其他的组件中，可以使用this.$http获取配置的axios
+Vue.prototype.$http = axios
+Vue.config.productionTip = false
+
 import 'font-awesome/css/font-awesome.min.css'
 
 Vue.use(ElementUI)

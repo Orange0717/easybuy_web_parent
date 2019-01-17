@@ -75,7 +75,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'EasyBuy_plat管理',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',

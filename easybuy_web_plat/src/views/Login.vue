@@ -51,18 +51,21 @@
             this.logining = true;
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
+            this.$http.post("/plat/login",loginParams).then(data => {
               this.logining = false;
               //NProgress.done();
-              let { msg, code, user } = data;
-              if (code !== 200) {
+                console.log(data)
+              let { success, message, resultObj } = data.data;
+              //登录不成功，success为false，那么返回失败提示
+              if (!success) {
                 this.$message({
-                  message: msg,
+                  message: message,
                   type: 'error'
                 });
               } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/table' });
+                  resultObj = {"name":loginParams.username}
+                sessionStorage.setItem('user', JSON.stringify(resultObj));
+                this.$router.push({ path: '/platMain' });
               }
             });
           } else {
